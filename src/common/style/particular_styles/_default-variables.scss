@@ -1,0 +1,101 @@
+
+// Meta
+
+
+/*
+ * Typography
+ * ======================================================================== */
+
+ $font-family-base: var(--font-family-base);  
+
+ //font weight
+ $font-weight-extra-bold: var(--font-weight-extra-bold);
+ $font-weight-bold: var(--font-weight-bold);
+ $font-weight-semi-bold: var(--font-weight-semi-bold);
+ $font-weight-normal: var(--font-weight-normal);
+ $font-weight-thin: var(--font-weight-thin);
+ 
+ $font-weight-base: $font-weight-thin;
+ $font-weight-th: $font-weight-semi-bold;
+ $font-weight-label: $font-weight-normal;
+ $font-weight-strong: $font-weight-bold;
+ 
+ //$font-size-initial:       14px; 
+ $font-size-initial: var(--font-size-initial);
+ $font-size-base:          var(--font-size-base); /* !default; */
+ $font-size-xxlg:          var(--font-size-xxlg);
+ $font-size-xlg:           var(--font-size-xlg); /* !default; */
+ $font-size-lg:            var(--font-size-lg);
+ $font-size-md:            var(--font-size-md);
+ $font-size-sm:            var(--font-size-sm);
+ $font-size-mini:          var(--font-size-mini); /* !default; */
+ $font-size-index:         var(--font-size-index);
+ 
+ /*
+  * Color System
+  * ======================================================================== */
+ 
+ $white:    var(--white);
+ $gray-50:  var(--gray-50);
+ $gray-100: var(--gray-100);
+ $gray-200: var(--gray-200);
+ $gray-300: var(--gray-300);
+ $gray-400: var(--gray-400);
+ $gray-500: var(--gray-500);
+ $gray-550: var(--gray-550);
+ $gray-600: var(--gray-600);
+ $gray-700: var(--gray-700);
+ $gray-800: var(--gray-800);
+ $gray-900: var(--gray-900);
+ $black:    var(--black);
+ $gray-light: $gray-100!default;
+ 
+ $blue:       var(--blue);
+ $blue-100:   var(--blue-100);
+ $indigo:     var(--indigo);
+ $purple:     var(--purple);
+ $pink:       var(--pink);
+ $red:        var(--red);
+ $orange:     var(--orange);
+ $yellow:     var(--yellow);
+ $green:      var(--green);
+ $teal:       var(--teal);
+ $cyan:       var(--cyan);
+ $default:    var(--default);
+ $inverse:    var(--inverse);
+ $black-999:  var(--black-999);
+ $light-blue: var(--light-blue);
+ $gray-000:   var(--gray-000);
+ $gray-001:   var(--gray-001);
+ 
+ $theme-colors: (
+   primary: $blue,
+   secondary: $gray-600,
+   success: $teal,
+   info: $cyan,
+   warning: $yellow,
+   danger: $red,
+   dark: #0D2B47,
+   inverse: $inverse,
+   gray: $gray-300,
+   light: $gray-100,
+   default: $default,
+   primary-light: #dee4ee,
+   success-light: #ecfaec,
+   info-light: #f2fafa,
+   warning-light: #fdf7e6,
+   danger-light: #fff2ef,
+ );
+ 
+ $link-color: $cyan;
+ 
+ $text-color: $gray-700 !default;
+ 
+ $section-text-color: $gray-600;
+ 
+ $background-color: $white;
+ 
+ 
+ /* components */
+ 
+ 
