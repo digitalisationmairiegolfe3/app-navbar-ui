@@ -6,7 +6,7 @@ import { RouteRedirectState } from "./types";
 import { RootState } from "@/store/types";
 
 export const state: RouteRedirectState = {
-  routeName: "email",
+  routeName: "working-space",
 };
 export const routeRedirect: Module<RouteRedirectState, RootState> = {
   namespaced: true,

@@ -1,22 +1,28 @@
 <template>
-  <b-navbar toggleable="md" class="nav-shadow p-0" variant="faded" type="light">
-    <b-navbar-nav class="p-0">        
-      <b-nav-item 
+  <b-navbar toggleable="md" class="nav-shadow  px-2 pr-4 py-0" variant="faded" type="light">
+    <b-navbar-nav class="p-0">
+      <div v-if="currentRouteName != home" class="icon-place"></div>
+        
+      <div v-if="currentRouteName == home"
         @click="menuClickEvent(homePath)"
-        class="icon-animation mx-2 p-0 d-flex align-items-center"
+        class="mx-2 p-0 d-flex align-items-center icon-animation"
       >
-        <span class="material-icons mouse-pointer">home</span>
-      </b-nav-item>
+        <span class="material-icons mouse-pointer p-2">home</span>
+      </div>
+              
 
-      <b-nav-item 
+      <div v-if="currentRouteName == home"
         @click="$router.go(-1)"
-        class="icon-animation mx-2 p-0 d-flex align-items-center"
+        class="mx-2 p-0 d-flex align-items-center icon-animation"
       >
-        <span class="material-icons mouse-pointer">arrow_back</span>
-      </b-nav-item>
+        <span class="material-icons mouse-pointer p-2">arrow_back</span>
+      </div>
     </b-navbar-nav>
-    <b-navbar-brand class="mx-2 p-0"
-      ><span class="section-title">APP NAME</span></b-navbar-brand>
+    <b-nav-text class="mx-2 p-0"
+      ><span class="section-title">{{
+        displayedName(currentRouteName)
+      }}</span></b-nav-text
+    >
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
@@ -27,69 +33,61 @@
         >
           <span class="subsection-title">{{ structureName }}</span>
         </b-nav-text>
-        <b-nav-text>{{ username }}</b-nav-text> 
-        <b-nav-item>
-            <b-avatar badge-variant="info" src="https://i.pravatar.cc/200?img=51"></b-avatar>  
-        </b-nav-item>            
-        <b-nav-item >
-            <span id="tooltip_id" class="material-icons pt-16">power_settings_new</span>
-            <b-tooltip target="tooltip_id" placement="bottom" variant="dark" boundary-padding="50">
-                <b> Se déconnecter </b>
-            </b-tooltip>
-        </b-nav-item>
+        <b-nav-item-dropdown right>
+          <template #button-content>
+            <b-avatar
+              badge-variant="info"
+              src="https://i.pravatar.cc/200?img=51"
+            ></b-avatar>
+            <b-nav-text class="pl-2 font-resize">username</b-nav-text>
+
+          </template>
+
+          <div v-if="currentRouteName == home">
+            <b-dropdown-item @click="menuClickEvent(profilPath)">{{
+              profilDisplayName
+            }}</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+          </div>
+          <b-dropdown-item href="#">Se déconnecter</b-dropdown-item>
+        </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </template>
 <script lang="ts">
-import Vue  from "vue";
-// import { Vue } from 'vue-property-decorator';
-import { mapGetters } from "vuex";
+import { Vue } from "vue-property-decorator";
+import { mapActions, mapGetters } from "vuex";
 import commonVars from "../../common/core/commonVars";
-// import { Utils } from "../../common/core/utils";
+import { Utils } from "../../common/core/utils";
 export default Vue.extend({
   name: "appNavbar",
-  props: {
-    exclude: { type: Array, default: () => [] },
-  },
   data() {
     return {
+      profilDisplayName: Utils._pageMap.get(commonVars.PROFIL),
+      profil: commonVars.PROFIL,
+      profilPath: commonVars.PROFIL_PATH,
       homePath: commonVars.HOME_PATH,
       home: commonVars.HOME,
       structureName: commonVars.STRUCTURE_NAME,
-      username:"username"
     };
   },
 
   methods: {
+    ...mapActions("profil", ["setIsProfilVisible"]),
+
     menuClickEvent(routeName: string) {
       this.$router.push({ path: routeName });
     },
 
-    // displayedName(name: string): string {
-    //   return Utils._pageMap.get(name)!;
-    // },
+    displayedName(name: string): string {
+      return Utils._pageMap.get(name)!;
+    },
   },
   computed: {
     ...mapGetters("routeRedirect", ["getRouteName"]),
     currentRouteName(): string {
       return this.$route.name!;
-    },
-    excluded() {
-      return this.exclude.indexOf(this.$route.path.split('/').pop()) > -1;
-    },
-    tree() {
-      return [''].concat(
-        this.$route.path
-          .split('/')
-          .slice(1)
-          .map((route) =>
-            route
-              .split('-')
-              .map((word) => word[0].toUpperCase() + word.slice(1))
-              .join(' '),
-          ),
-      );
     },
   },
 });
